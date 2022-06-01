@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup as bs
-from parse_methods import parse_method
+from ParseMethods import parse_method
 import re
 import unicodedata as ud
 from parse_ingredients import parse_ingredient
