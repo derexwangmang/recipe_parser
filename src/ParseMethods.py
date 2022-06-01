@@ -14,6 +14,11 @@ class Method:
         self.primary_cooking = []
         self.secondary_cooking = []
         self.direction = input
+    def __str__(self):
+        print("order = {}".format(self.order))
+        # primary cooking = {primary}, secondary cooking = {secondary}, direction = {direction}".format(
+        #     order=self.order, primary = self.primary_cooking, secondary = self.secondary_cooking, direction = self.direction
+        # ))
 
 
 def parse_method(direction, i ):
