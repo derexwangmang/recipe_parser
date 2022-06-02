@@ -1,65 +1,91 @@
-import nltk
-from nltk.tag import pos_tag
-from nltk.tokenize import word_tokenize
 import spacy
-from textblob import TextBlob
 import re
-# from parse_tools import Method
 
+# class Method:
+#     def __init__(self, input, order):
+#         self.order = order
+#         self.primary_cooking = []
+#         self.secondary_cooking = []
+#         self.direction = input
+#     def __str__(self):
+#         print("order = {}".format(self.order))
 
-# primary = ['fry', 'saute', 'bake', 'roast', 'boil', 'steam', 'broil', 'poach', 'grill']
-
-# nlp = spacy.load("en_core_web_sm")
-
-class Method:
-    def __init__(self, input, order):
-        self.order = order
-        self.primary_cooking = []
-        self.secondary_cooking = []
-        self.direction = input
-    def __str__(self):
-        print("order = {}".format(self.order))
-        # primary cooking = {primary}, secondary cooking = {secondary}, direction = {direction}".format(
-        #     order=self.order, primary = self.primary_cooking, secondary = self.secondary_cooking, direction = self.direction
-        # ))
-
+import spacy
 sp = spacy.load('en_core_web_sm')
 
-def parse_tool(direction):
+toollist = ["bowl", "frying pan", "skillet", "fork", "spoon", "chopsticks",
+"plate", "microwave", "oven", "air fryer", "saucepan", "pot", "sheet pan", 
+"baking pan", "pan", "baking dish", "knife", "knives", "measuring spoon",
+"measuring cup", "peeler", "whisk", "tongs", "cutting board", "colander",
+"can opener", "grater", "microplane", 'blender', "spatula", "slotted spoon",
+"corkscrew", "plastic bag", "broiler pan"]
+method_to_tool = {"whisk": "whisk", "grate": "grater", "blend":"blender", "deep fry":"deep fryer",
+"stir":"spoon", "microwave":"microwave", "drain":"colander", "bake":"oven", 
+"strain":"strainer", "saute":"wooden spoon", "chop":"knife", "mix":"spoon"}
 
-    sentences = direction.split(".")
-    cleansentences = []
-    for sentence in sentences:
-        cleansentence = sentence.strip()
-        cleansentence = cleansentence.lower()
-        cleansentences.append(cleansentence)
 
-    tools = []
-    # print(cleansentences)
-    for sentence in cleansentences:
-        sentence = re.sub(r'[^\w\s]', '', sentence)
-        print(sentence)
-        spltsentence = sentence.split()
-        cutword = None
-        for i in range(len(spltsentence)):
-            keywords = ["in", "into", "using","use"]
-            if spltsentence[i] in keywords:
-                cutword = spltsentence[(i+1):]
+def parse_tool(directions):
+    def parse(direction):
+        sentences = direction.split(".")
+        cleansentences = []
+        for sentence in sentences:
+            sentence = sentence.split(';')
+            if sentence == ['']:
+                break
+            else:
+                for s in sentence:
+                    cleansentence = s.strip()
+                    cleansentence = cleansentence.lower()
+                    cleansentences.append(cleansentence)
 
-        toollst = []
+        tools = []
+        tool_pattern = re.compile('in|into|using|use|to')
+        sent_containing_tool = list(filter(tool_pattern.search, cleansentences))
 
-        if cutword != None:
-            sen = sp(" ".join(cutword))
-            for j in range(len(cutword)):
-                if sen[j].pos_ == "NOUN":
-                    if sen[j-1].pos_ == "ADJ":
-                        toollst.append(cutword[j-1])
-                        toollst.append(cutword[j])
-                    else:
-                        toollst.append(cutword[j])
-                    break
+        for sentence in cleansentences:
+            spltsentence = sentence.split()
+            if sentence in sent_containing_tool:
+                sentence = re.sub(r'[^\w\s]', '', sentence)
                 
-            tool = " ".join(toollst)
-            tools.append(tool)
+                sen = sp(sentence)
+                # print("sentence is: ", sentence)
+                # toolwords = []
+                for tool in toollist:
+                    toolwords = []
+                    if tool in sentence: 
+                        finaltool = None
+                        # print("THE TOOL FOUND IS: ", tool)
+                        toolsplt = tool.split(" ")
+                        # print("the first word in the split tool list is ", toolsplt[0])
+                        if toolsplt[0] in spltsentence:
+                            index = spltsentence.index(toolsplt[0])
+                        else:
+                            break
+                        # print("SPLIT TOOL IS ", toolsplt)
+                        if sen[index-1].pos_ == "ADJ":
+                            toolwords.append(str(sen[index-1]))
+                            for word in toolsplt:
+                                toolwords.append(word)
+                            # print("toolwords is ", toolwords, "(WITH ADJECTIVE)")
+                        else:
+                            for word in toolsplt:
+                                toolwords.append(word)
+                            # print("toolwords is ", toolwords, "(NO ADJECTIVE)")
+                        # print("the toolwords as a list is: ", toolwords)
+                        finaltool = " ".join(toolwords)
+                        # print("FINAL TOOL FOUND: ", finaltool)
+                        tools.append(finaltool) 
+            else:
+                for word in spltsentence:
+                    for method in method_to_tool.keys():
+                        if word == method:
+                            tools.append(method_to_tool.get(method))   
+        tools = list(set(tools))
+        return tools
 
-    return tools
+    result = []
+    for i in range(len(directions)):
+        currtool = parse(directions[i])
+        result.extend(currtool)
+    result = list(set(result))
+    return result
