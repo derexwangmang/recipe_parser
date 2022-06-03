@@ -106,7 +106,3 @@ def fetchRecipe(url):
         print(repr(error))
         return None
 
-<<<<<<< HEAD
-fetchRecipe('https://www.allrecipes.com/recipe/228285/teriyaki-salmon/')
-=======
->>>>>>> a62b7a3470b05995fbc9f6118000b157b1db5893

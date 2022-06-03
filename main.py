@@ -1,7 +1,29 @@
+print("Welcome to our recipe parser and interactive cookbook!")
+print("Please provide the URL of a recipe from AllRecipes.com: ", end='')
+url = str(input())
 
+while not url.startswith("https://www.allrecipes.com/"):
+    print("{} does not start with https://www.allrecipes.com/".format(url))
+    print("Please provide the URL of a recipe from AllRecipes.com: ", end='')
+    url = str(input())
 
+print("Fetched from {}".format(url))
+print("What would you like to do with the recipe?")
+print("Option 1: To vegetarian")
+print("Option 2: To non-vegetarian")
+print("Option 3: To healthy")
+print("Option 4: To non-healthy")
+print("Option 5: To an additional style of cuisine")
+print("Option 6: To an additional style of cuisine")
+print("Option 7: Double the amount")
+print("Option 8: Half the amount")
+print("Input a number 1-8: ", end='')
 
-
+option = input()
+while not option.isdigit() or not 1 <= int(option) <= 8:
+    print("{} not within 1-8".format(option))
+    print("Input a number 1-8: ", end='')
+    option = input()
 
 ''' 
 a Recipe is a map of:
