@@ -68,7 +68,7 @@ def fetchRecipe(url):
 
         # Ingredients
         ingredients = [x.text[:-1] for x in soup.find_all("span", class_="ingredients-item-name elementFont__body")]
-        ingredients = [ingredient.text.strip().translate(fraction).encode('ascii', 'ignore').decode("utf-8") for ingredient in ingredients]
+        ingredients = [ingredient.strip().translate(fraction).encode('ascii', 'ignore').decode("utf-8") for ingredient in ingredients]
 
         parsed_ingredients = []
         for ingredient in ingredients:
@@ -93,7 +93,9 @@ def fetchRecipe(url):
         recipe["methods"] = methods
 
         # Tools
-        recipe["tools"] = parse_tool(methods)
+        # recipe["tools"] = parse_tool(methods)
+
+        print(recipe['methods'])
 
         return recipe
 
@@ -102,3 +104,4 @@ def fetchRecipe(url):
         print(repr(error))
         return None
 
+fetchRecipe('https://www.allrecipes.com/recipe/16167/beef-bourguignon-i/')
