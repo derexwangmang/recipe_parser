@@ -78,7 +78,7 @@ def fetchRecipe(url):
 
         # Directions
         directions = soup.find_all("div", class_="section-body elementFont__body--paragraphWithin elementFont__body--linkWithin")
-        recipe["directions"] = [method.strip().encode('ascii', 'ignore').decode("utf-8") for method in directions]
+        recipe["directions"] = ' '.join([x.text[:-2] for x in directions]).split('.')
 
         # Nutrition
         nutrition = soup.find("div", class_="recipeNutritionSectionBlock")
