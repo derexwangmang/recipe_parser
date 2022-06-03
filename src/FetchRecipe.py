@@ -66,7 +66,7 @@ def fetchRecipe(url):
         recipe_info_details = [x.text[:-1] for x in soup.find_all("div", class_="recipe-meta-item-body elementFont__subtitle")]
         recipe["info"] = zip(recipe_info, recipe_info_details)
 
-        # Ingredients
+        ## Ingredients
         ingredients = [x.text[:-1] for x in soup.find_all("span", class_="ingredients-item-name elementFont__body")]
         ingredients = [ingredient.strip().translate(fraction).encode('ascii', 'ignore').decode("utf-8") for ingredient in ingredients]
 
@@ -78,6 +78,7 @@ def fetchRecipe(url):
 
         # Directions
         directions = soup.find_all("div", class_="section-body elementFont__body--paragraphWithin elementFont__body--linkWithin")
+        print(directions)
         recipe["directions"] = [method.strip().encode('ascii', 'ignore').decode("utf-8") for method in directions]
 
         # Nutrition
@@ -104,4 +105,4 @@ def fetchRecipe(url):
         print(repr(error))
         return None
 
-fetchRecipe('https://www.allrecipes.com/recipe/16167/beef-bourguignon-i/')
+fetchRecipe('https://www.allrecipes.com/recipe/228285/teriyaki-salmon/')
