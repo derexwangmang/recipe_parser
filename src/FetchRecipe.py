@@ -72,8 +72,16 @@ def fetchRecipe(url):
 
         parsed_ingredients = []
         for ingredient in ingredients:
-            print(parse_ingredient(ingredient))
-            parsed_ingredients.append(parse_ingredient(ingredient))
+            print(ingredient)
+            try:
+                print(parse_ingredient(ingredient))
+                parsed_ingredients.append(parse_ingredient(ingredient))
+            except:
+                if ingredient == "salt and pepper to taste":
+                    parsed_ingredients.append(parse_ingredient("1 oz of salt and pepper"))
+                else:
+                    print("failed to add that ingredient\n\n\n\n\n\n")
+        print(parsed_ingredients)
         recipe["ingredients"] = parsed_ingredients
 
         # Directions
