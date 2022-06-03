@@ -4,6 +4,7 @@ from ParseMethods import parse_method
 import re
 import unicodedata as ud
 from parse_ingredients import parse_ingredient
+from parse_tools import parse_tool
 
 def fetchRecipe(url):
     numerator = {
@@ -91,7 +92,12 @@ def fetchRecipe(url):
             print(method.direction, method.primary_cooking, method.secondary_cooking)
         recipe["methods"] = methods
 
+        # Tools
+        recipe["tools"] = parse_tool(methods)
+
         return recipe
+
+
     except AssertionError as error:
         print(repr(error))
         return None
