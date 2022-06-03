@@ -4,7 +4,6 @@ from ParseMethods import parse_method
 import re
 import unicodedata as ud
 from parse_ingredients import parse_ingredient
-from parse_tools import parse_tool
 
 def fetchRecipe(url):
     numerator = {
@@ -68,7 +67,7 @@ def fetchRecipe(url):
 
         # Ingredients
         ingredients = [x.text[:-1] for x in soup.find_all("span", class_="ingredients-item-name elementFont__body")]
-        ingredients = [ingredient.strip().translate(fraction).encode('ascii', 'ignore').decode("utf-8") for ingredient in ingredients]
+        ingredients = [ingredient.text.strip().translate(fraction).encode('ascii', 'ignore').decode("utf-8") for ingredient in ingredients]
 
         parsed_ingredients = []
         for ingredient in ingredients:
@@ -78,7 +77,7 @@ def fetchRecipe(url):
 
         # Directions
         directions = soup.find_all("div", class_="section-body elementFont__body--paragraphWithin elementFont__body--linkWithin")
-        recipe["directions"] = ' '.join([x.text[:-2] for x in directions]).split('.')
+        recipe["directions"] = [method.strip().encode('ascii', 'ignore').decode("utf-8") for method in directions]
 
         # Nutrition
         nutrition = soup.find("div", class_="recipeNutritionSectionBlock")
@@ -86,22 +85,15 @@ def fetchRecipe(url):
 
         # Methods
         methods = []
-        for i in range(len(directions)):
-            method = parse_method(directions[i], i)
+        direc = ' '.join([x.text[:-2] for x in methods]).split('.')
+        for i in range(len(direc)):
+            method = parse_method(direc[i], i)
             methods.append(method)
             print(method.direction, method.primary_cooking, method.secondary_cooking)
         recipe["methods"] = methods
 
-        # Tools
-        # recipe["tools"] = parse_tool(methods)
-
-        print(recipe['methods'])
-
         return recipe
-
-
     except AssertionError as error:
         print(repr(error))
         return None
 
-fetchRecipe('https://www.allrecipes.com/recipe/16167/beef-bourguignon-i/')
