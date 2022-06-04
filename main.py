@@ -1,3 +1,12 @@
+from pyparsing import opAssoc
+from src.FetchRecipe import fetchRecipe
+from src.ParseMethods import parse_method
+from src.transformation_healthy import transform_healthy
+from src.transformation_vegetarian import transform_vegetarian
+from printpretty import prettyprint
+
+
+
 print("Welcome to our recipe parser and interactive cookbook!")
 print("Please provide the URL of a recipe from AllRecipes.com: ", end='')
 url = str(input())
@@ -7,8 +16,9 @@ while not url.startswith("https://www.allrecipes.com/"):
     print("Please provide the URL of a recipe from AllRecipes.com: ", end='')
     url = str(input())
 
-print("Fetched from {}".format(url))
-print("What would you like to do with the recipe?")
+recipe = fetchRecipe(url)
+print("\nFetched from {}".format(url))
+print("\nWhat would you like to do with the recipe?\n")
 print("Option 1: To vegetarian")
 print("Option 2: To non-vegetarian")
 print("Option 3: To healthy")
@@ -17,13 +27,47 @@ print("Option 5: To an additional style of cuisine")
 print("Option 6: To an additional style of cuisine")
 print("Option 7: Double the amount")
 print("Option 8: Half the amount")
-print("Input a number 1-8: ", end='')
+print("\nInput a number 1-8: \n", end='')
 
 option = input()
 while not option.isdigit() or not 1 <= int(option) <= 8:
-    print("{} not within 1-8".format(option))
+    print("ERROR: {} not within 1-8".format(option))
     print("Input a number 1-8: ", end='')
     option = input()
+
+
+option = int(option)
+
+if option == 1:
+    print("\nYou chose to transform your recipe to vegetarian.\n")
+    newrecipe = transform_vegetarian(recipe, 'to vegetarian')
+    transformation = "vegetarian"
+    prettyprint(newrecipe, transformation)
+elif option == 2:
+    print("\nYou chose to transform your recipe to non-vegetarian.\n")
+    newrecipe = transform_vegetarian(recipe, 'to non-vegetarian')
+    transformation = "non-vegetarian"
+    prettyprint(newrecipe, transformation)
+elif option == 3:
+    print("\nYou chose to transform your recipe to healthy.\n")
+    newrecipe = transform_healthy(recipe, 1)
+    transformation = "healthy"
+    prettyprint(newrecipe, transformation)
+elif option == 4:
+    print("\nYou chose to transform your recipe to unhealthy.\n")
+    newrecipe = transform_healthy(recipe, 0)
+    transformation = "unhealthy"
+    prettyprint(newrecipe, transformation)
+elif option == 5:
+    pass
+elif option == 6:
+    pass
+elif option == 7:
+    pass
+elif option == 8:
+    pass
+
+
 
 ''' 
 a Recipe is a map of:

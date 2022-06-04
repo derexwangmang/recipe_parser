@@ -21,7 +21,9 @@ class Ingredient:
 # Expected arguments:
 #   - recipe: Recipe
 #   - health: 0 (unhealthy), 1 (healthy)
-def transform(recipe, health):
+def transform_healthy(recipe, health):
+
+    ### health == 0 means unhealthy, health == 1 means healthy
     for ingredient in recipe['ingredients']:
         if health == 0:
             # Replace oil with unhealthy
@@ -50,14 +52,16 @@ def transform(recipe, health):
             else:
                 ingredient.quantity = ingredient.quantity / 2
 
-# Checking unhealthy
-recipe = {'url': '', 'title': '', 'info': '', 'ingredients': [Ingredient(name='Salt', quantity=1.0, unit='cup', comment='', original_string='1 cup of salt'), Ingredient(name='granola oil', quantity=1.0, unit='oz', comment='', original_string='1 cup of salt')], 'methods': [], 'tools': []}
-print(recipe)
-transform(recipe, 0)
-print(recipe)
+    return recipe
 
-# Checking healthy
-recipe = {'url': '', 'title': '', 'info': '', 'ingredients': [Ingredient(name='Salt', quantity=1.0, unit='cup', comment='', original_string='1 cup of salt'), Ingredient(name='granola oil', quantity=1.0, unit='oz', comment='', original_string='1 cup of salt')], 'methods': [], 'tools': []}
-print(recipe)
-transform(recipe, 1)
-print(recipe)
+# # Checking unhealthy
+# recipe = {'url': '', 'title': '', 'info': '', 'ingredients': [Ingredient(name='Salt', quantity=1.0, unit='cup', comment='', original_string='1 cup of salt'), Ingredient(name='granola oil', quantity=1.0, unit='oz', comment='', original_string='1 cup of salt')], 'methods': [], 'tools': []}
+# print(recipe)
+# transform_healthy(recipe, 0)
+# print(recipe)
+
+# # Checking healthy
+# recipe = {'url': '', 'title': '', 'info': '', 'ingredients': [Ingredient(name='Salt', quantity=1.0, unit='cup', comment='', original_string='1 cup of salt'), Ingredient(name='granola oil', quantity=1.0, unit='oz', comment='', original_string='1 cup of salt')], 'methods': [], 'tools': []}
+# print(recipe)
+# transform_healthy(recipe, 1)
+# print(recipe)

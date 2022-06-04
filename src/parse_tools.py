@@ -41,62 +41,22 @@ def parse_tool(directions):
 
         tools = []
         tool_pattern = ["in","into","using","use","to"]
-        # sent_containing_tool = list(filter(tool_pattern.search, sentence))
-        # print(sent_containing_tool)
-
-        # for sentence in cleansentences:
-        #     spltsentence = sentence.split()
-        #     if sentence in sent_containing_tool:
-        #         sentence = re.sub(r'[^\w\s]', '', sentence)
-                
-        #         sen = sp(sentence)
-        #         # print("sentence is: ", sentence)
-        #         # toolwords = []
-        #         for tool in toollist:
-        #             toolwords = []
-        #             if tool in sentence: 
-        #                 finaltool = None
-        #                 # print("THE TOOL FOUND IS: ", tool)
-        #                 toolsplt = tool.split(" ")
-        #                 # print("the first word in the split tool list is ", toolsplt[0])
-        #                 if toolsplt[0] in spltsentence:
-        #                     index = spltsentence.index(toolsplt[0])
-        #                 else:
-        #                     break
-        #                 # print("SPLIT TOOL IS ", toolsplt)
-        #                 if sen[index-1].pos_ == "ADJ":
-        #                     toolwords.append(str(sen[index-1]))
-        #                     for word in toolsplt:
-        #                         toolwords.append(word)
-        #                     # print("toolwords is ", toolwords, "(WITH ADJECTIVE)")
-        #                 else:
-        #                     for word in toolsplt:
-        #                         toolwords.append(word)
-        #                     # print("toolwords is ", toolwords, "(NO ADJECTIVE)")
-        #                 # print("the toolwords as a list is: ", toolwords)
-        #                 finaltool = " ".join(toolwords)
-        #                 # print("FINAL TOOL FOUND: ", finaltool)
-        #                 tools.append(finaltool) 
-        #     else:
-        #         for word in spltsentence:
-        #             for method in method_to_tool.keys():
-        #                 if word == method:
-        #                     tools.append(method_to_tool.get(method))   
-        spltsentence = sentence.split()
+   
+        cleansentence = re.sub(r'[^\w\s]', '', sentence)
+        spltsentence = cleansentence.split()
         
-        if any(tool in sentence for tool in tool_pattern):
-            sentence = re.sub(r'[^\w\s]', '', sentence)
-            
-            sen = sp(sentence)
-            # print("sentence is: ", sentence)
+        if any(tool in cleansentence for tool in tool_pattern):
+            sen = sp(cleansentence)
+            # print("sentence is: ", cleansentence)
             # toolwords = []
             for tool in toollist:
                 toolwords = []
-                if tool in sentence: 
+                if tool in cleansentence: 
                     finaltool = None
                     # print("THE TOOL FOUND IS: ", tool)
                     toolsplt = tool.split(" ")
-                    # print("the first word in the split tool list is ", toolsplt[0])
+                    # print("the first word in the split tool list is", toolsplt[0])
+                    # print("the split sentence is ", spltsentence)
                     if toolsplt[0] in spltsentence:
                         index = spltsentence.index(toolsplt[0])
                     else:

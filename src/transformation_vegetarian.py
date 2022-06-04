@@ -1,4 +1,4 @@
-from FetchRecipe import fetchRecipe
+# from src.FetchRecipe import fetchRecipe
 
 TO_VEG = {'ground beef':'crumbled tofu', 'beef':'tofu', 'hamburger':'black bean veggie hamburger', 'chicken':'tempeh', 
 'bacon':'tempeh', 'duck':'seitan', 'steak':'king oyster mushroom', 'sausage':'vegetarian sausage', 'pork':'jackfruit', 
@@ -58,10 +58,10 @@ def transform_vegetarian(recipe, switch):
         if changed == True:
             method.direction = newdirection
         newmethods.append(method)
-        print(method.direction)
+        # print(method.direction)
             
     recipe['methods'] = newmethods
     return recipe
 
-recipe = fetchRecipe('https://www.allrecipes.com/recipe/244716/shirataki-meatless-meat-pad-thai/')
-transform_vegetarian(recipe, 'to non-vegetarian')
+# recipe = fetchRecipe('https://www.allrecipes.com/recipe/244716/shirataki-meatless-meat-pad-thai/')
+# transform_vegetarian(recipe, 'to non-vegetarian')

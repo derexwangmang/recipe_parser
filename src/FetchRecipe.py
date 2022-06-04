@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup as bs
-from ParseMethods import parse_method
+from src.ParseMethods import parse_method
 import re
 import unicodedata as ud
 from parse_ingredients import parse_ingredient
-from parse_tools import parse_tool
+from src.parse_tools import parse_tool
 
 def fetchRecipe(url):
     numerator = {
@@ -114,4 +114,4 @@ def fetchRecipe(url):
         print(repr(error))
         return None
 
-fetchRecipe('https://www.allrecipes.com/recipe/24074/alysias-basic-meat-lasagna/')
+fetchRecipe('https://www.allrecipes.com/recipe/244716/shirataki-meatless-meat-pad-thai/')
