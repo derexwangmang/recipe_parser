@@ -15,7 +15,7 @@ class Method:
         self.secondary_cooking = []
         self.direction = input
     def __str__(self):
-        print("order = {}".format(self.order))
+        print("direction = {}".format(str(self.direction)))
         # primary cooking = {primary}, secondary cooking = {secondary}, direction = {direction}".format(
         #     order=self.order, primary = self.primary_cooking, secondary = self.secondary_cooking, direction = self.direction
         # ))
