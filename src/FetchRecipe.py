@@ -67,11 +67,11 @@ def fetchRecipe(url):
 
         ## Ingredients
         ingredients = [x.text[:-1] for x in soup.find_all("span", class_="ingredients-item-name elementFont__body")]
-        ingredients = [ingredient.text.strip().translate(fraction).encode('ascii', 'ignore').decode("utf-8") for ingredient in ingredients]
+        ingredients = [ingredient.strip().translate(fraction).encode('ascii', 'ignore').decode("utf-8") for ingredient in ingredients]
 
         parsed_ingredients = []
         for ingredient in ingredients:
-            print(ingredient)
+            # print(ingredient)
             try:
                 print(parse_ingredient(ingredient))
                 parsed_ingredients.append(parse_ingredient(ingredient))
@@ -80,7 +80,6 @@ def fetchRecipe(url):
                     parsed_ingredients.append(parse_ingredient("1 oz of salt and pepper"))
                 else:
                     print("failed to add that ingredient\n\n\n\n\n\n")
-        print(parsed_ingredients)
         recipe["ingredients"] = parsed_ingredients
 
         # Directions
