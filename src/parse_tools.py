@@ -88,30 +88,30 @@ def parse_tool(directions):
             sentence = re.sub(r'[^\w\s]', '', sentence)
             
             sen = sp(sentence)
-            print("sentence is: ", sentence)
+            # print("sentence is: ", sentence)
             # toolwords = []
             for tool in toollist:
                 toolwords = []
                 if tool in sentence: 
                     finaltool = None
-                    print("THE TOOL FOUND IS: ", tool)
+                    # print("THE TOOL FOUND IS: ", tool)
                     toolsplt = tool.split(" ")
-                    print("the first word in the split tool list is ", toolsplt[0])
+                    # print("the first word in the split tool list is ", toolsplt[0])
                     if toolsplt[0] in spltsentence:
                         index = spltsentence.index(toolsplt[0])
                     else:
                         break
-                    print("SPLIT TOOL IS ", toolsplt)
+                    # print("SPLIT TOOL IS ", toolsplt)
                     prevword = str(sen[index-1])
                     if sen[index-1].pos_ == "ADJ" and prevword.lower() != "set":
                         toolwords.append(str(sen[index-1]))
                         for word in toolsplt:
                             toolwords.append(word)
-                        print("toolwords is ", toolwords, "(WITH ADJECTIVE)")
+                        # print("toolwords is ", toolwords, "(WITH ADJECTIVE)")
                     else:
                         for word in toolsplt:
                             toolwords.append(word)
-                        print("toolwords is ", toolwords, "(NO ADJECTIVE)")
+                        # print("toolwords is ", toolwords, "(NO ADJECTIVE)")
                     # print("the toolwords as a list is: ", toolwords)
                     finaltool = " ".join(toolwords)
                     # print("FINAL TOOL FOUND: ", finaltool)

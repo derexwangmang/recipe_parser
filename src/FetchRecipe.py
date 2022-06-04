@@ -74,7 +74,7 @@ def fetchRecipe(url):
         for ingredient in ingredients:
             # print(ingredient)
             try:
-                print(parse_ingredient(ingredient))
+                # print(parse_ingredient(ingredient))
                 parsed_ingredients.append(parse_ingredient(ingredient))
             except:
                 if ingredient == "salt and pepper to taste":
@@ -107,11 +107,11 @@ def fetchRecipe(url):
 
         # Tools
         recipe["tools"] = parse_tool(methoddirections)
-        print(recipe["tools"])
+        # print(recipe["tools"])
 
         return recipe
     except AssertionError as error:
         print(repr(error))
         return None
 
-fetchRecipe('https://www.allrecipes.com/recipe/228285/teriyaki-salmon/')
+fetchRecipe('https://www.allrecipes.com/recipe/24074/alysias-basic-meat-lasagna/')
