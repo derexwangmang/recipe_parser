@@ -1,5 +1,7 @@
-# from FetchRecipe import fetchRecipe
-# from transformation_vegetarian import transform_vegetarian
+from src.FetchRecipe import fetchRecipe
+# from src.transformation_vegetarian import transform_vegetarian
+from src.transformation_free import transform_free
+from src.transformation_vegetarian import transform_vegetarian
 
 class color:
     BOLD = '\033[1m'
@@ -46,6 +48,9 @@ def prettyprint(recipe, transformation):
     ## print thank you
     print(color.BOLD + "\nThank you for using our recipe parser and interactive cookbook!" + color.END)
 
-# recipe = fetchRecipe('https://www.allrecipes.com/recipe/244716/shirataki-meatless-meat-pad-thai/')
-# newrecipe = transform_vegetarian(recipe, 'to non-vegetarian')
-# printpretty(newrecipe, 'non-vegetarian')
+# recipe = fetchRecipe('https://www.allrecipes.com/recipe/24074/alysias-basic-meat-lasagna/')
+# # newrecipe = transform_free(recipe, 'lactose-free')
+# # prettyprint(newrecipe, 'lactose-free')
+
+# newrecipe = transform_vegetarian(recipe, 'vegetarian')
+# prettyprint(newrecipe, 'vegetarian')
