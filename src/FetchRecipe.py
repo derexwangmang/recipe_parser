@@ -66,15 +66,22 @@ def fetchRecipe(url):
         recipe_info_details = [x.text[:-1] for x in soup.find_all("div", class_="recipe-meta-item-body elementFont__subtitle")]
         recipe["info"] = zip(recipe_info, recipe_info_details)
 
-        # ## Ingredients
-        # ingredients = [x.text[:-1] for x in soup.find_all("span", class_="ingredients-item-name elementFont__body")]
-        # ingredients = [ingredient.strip().translate(fraction).encode('ascii', 'ignore').decode("utf-8") for ingredient in ingredients]
+        ## Ingredients
+        ingredients = [x.text[:-1] for x in soup.find_all("span", class_="ingredients-item-name elementFont__body")]
+        ingredients = [ingredient.strip().translate(fraction).encode('ascii', 'ignore').decode("utf-8") for ingredient in ingredients]
 
-        # parsed_ingredients = []
-        # for ingredient in ingredients:
-        #     print(parse_ingredient(ingredient))
-        #     parsed_ingredients.append(parse_ingredient(ingredient))
-        # recipe["ingredients"] = parsed_ingredients
+        parsed_ingredients = []
+        for ingredient in ingredients:
+            # print(ingredient)
+            try:
+                print(parse_ingredient(ingredient))
+                parsed_ingredients.append(parse_ingredient(ingredient))
+            except:
+                if ingredient == "salt and pepper to taste":
+                    parsed_ingredients.append(parse_ingredient("1 oz of salt and pepper"))
+                else:
+                    print("failed to add that ingredient\n\n\n\n\n\n")
+        recipe["ingredients"] = parsed_ingredients
 
         # Directions
         directions = soup.find_all("div", class_="section-body elementFont__body--paragraphWithin elementFont__body--linkWithin")
