@@ -1,7 +1,7 @@
 UNHEALTHY_MAPPING = {"oil": "corn oil", "butter": "vegetable oil"}
 HEALTHY_MAPPING = {"oil": "avocado oil", "butter": "coconut oil"}
 
-CARBS = set(["noodles", "rice", "tofu", "pasta", "crackers", "flour"])
+CARBS = set(["noodles", "rice", "tofu", "pasta", "crackers", "flour", 'pasta'])
 FLAVORS = set(["salt", "sugar", "sauce"])
 
 from dataclasses import dataclass
