@@ -5,8 +5,22 @@ import re
 import unicodedata as ud
 from parse_ingredients import parse_ingredient
 from src.parse_tools import parse_tool
+import sys, os
+
+
+# https://stackoverflow.com/questions/8391411/how-to-block-calls-to-print
+# Disable
+def blockPrint():
+    sys.stdout = open(os.devnull, 'w')
+
+# Restore
+def enablePrint():
+    sys.stdout = sys.__stdout__
+
 
 def fetchRecipe(url):
+    blockPrint()
+
     numerator = {
         'ONE':1,
         'TWO':2,
@@ -109,9 +123,12 @@ def fetchRecipe(url):
         recipe["tools"] = parse_tool(methoddirections)
         # print(recipe["tools"])
 
+        enablePrint()
+
         return recipe
     except AssertionError as error:
+        enablePrint()
         print(repr(error))
         return None
 
-fetchRecipe('https://www.allrecipes.com/recipe/244716/shirataki-meatless-meat-pad-thai/')
+# fetchRecipe('https://www.allrecipes.com/recipe/244716/shirataki-meatless-meat-pad-thai/')

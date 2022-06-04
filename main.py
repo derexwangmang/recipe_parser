@@ -1,7 +1,7 @@
 from pyparsing import opAssoc
 from src.FetchRecipe import fetchRecipe
 from src.ParseMethods import parse_method
-from src.transformation_healthy import transform_healthy
+from transformation_health import transform_healthy
 from src.transformation_vegetarian import transform_vegetarian
 from printpretty import prettyprint
 
@@ -27,7 +27,7 @@ print("Option 5: To an additional style of cuisine")
 print("Option 6: To an additional style of cuisine")
 print("Option 7: Double the amount")
 print("Option 8: Half the amount")
-print("\nInput a number 1-8: \n", end='')
+print("\nInput a number 1-8: ", end='')
 
 option = input()
 while not option.isdigit() or not 1 <= int(option) <= 8:
