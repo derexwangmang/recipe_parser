@@ -1,7 +1,7 @@
 from pyparsing import opAssoc
 from src.FetchRecipe import fetchRecipe
-from src.ParseMethods import parse_method
-from transformation_health import transform_healthy
+# from src.ParseMethods import parse_method
+from src.transformation_health import transform_healthy
 from src.transformation_vegetarian import transform_vegetarian
 from printpretty import prettyprint
 from src.transformation_free import transform_free
