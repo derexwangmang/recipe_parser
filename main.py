@@ -5,6 +5,7 @@ from src.transformation_health import transform_healthy
 from src.transformation_vegetarian import transform_vegetarian
 from printpretty import prettyprint
 from src.transformation_free import transform_free
+from src.transformation_chinese import transformation_chinese
 
 
 print("Welcome to our recipe parser and interactive cookbook!")
@@ -23,7 +24,7 @@ print("Option 1: To vegetarian")
 print("Option 2: To non-vegetarian")
 print("Option 3: To healthy")
 print("Option 4: To non-healthy")
-print("Option 5: To an additional style of cuisine")
+print("Option 5: To Chinese cuisine")
 print("Option 6: To an additional style of cuisine")
 print("Option 7: Double the amount")
 print("Option 8: Half the amount")
@@ -61,7 +62,9 @@ elif option == 4:
     transformation = "unhealthy"
     prettyprint(newrecipe, transformation)
 elif option == 5:
-    pass
+    print("\nYou chose to transform the cuisine of your recipe to Chinese.\n")
+    newrecipe = transformation_chinese(recipe)
+    prettyprint(newrecipe, "Chinese")
 elif option == 6:
     pass
 elif option == 7:

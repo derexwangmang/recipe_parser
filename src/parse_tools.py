@@ -14,7 +14,7 @@ import spacy
 sp = spacy.load('en_core_web_sm')
 
 toollist = ["bowl", "frying pan", "skillet", "fork", "spoon", "chopsticks",
-"plate", "microwave", "oven", "air fryer", "saucepan", "pot", "sheet pan", 
+"plate", "microwave", "oven", "air fryer", "sauce pan", "saucepan", "pot", "sheet pan", 
 "baking pan", "pan", "baking dish", "knife", "knives", "measuring spoon",
 "measuring cup", "peeler", "whisk", "tongs", "cutting board", "colander",
 "can opener", "grater", "microplane", 'blender', "spatula", "slotted spoon",
