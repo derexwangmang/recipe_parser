@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup as bs
-from src.ParseMethods import parse_method
+from ParseMethods import parse_method
 import re
 import unicodedata as ud
 from parse_ingredients import parse_ingredient
-from src.parse_tools import parse_tool
+from parse_tools import parse_tool
 import sys, os
 
 
@@ -92,7 +92,7 @@ def fetchRecipe(url):
                 parsed_ingredients.append(parse_ingredient(ingredient))
             except:
                 if ingredient == "salt and pepper to taste":
-                    parsed_ingredients.append(parse_ingredient("1 oz of salt and pepper"))
+                    parsed_ingredients.append(parse_ingredient("1 tsp salt and pepper, or to taste"))
                 else:
                     print("failed to add that ingredient\n\n\n\n\n\n")
         recipe["ingredients"] = parsed_ingredients
@@ -100,7 +100,7 @@ def fetchRecipe(url):
         # Directions
         directions = soup.find_all("div", class_="section-body elementFont__body--paragraphWithin elementFont__body--linkWithin")
         # print(directions)
-        # recipe["directions"] = [method.strip().encode('ascii', 'ignore').decode("utf-8") for method in directions]
+        recipe["directions"] = [method.text[:-2].encode('ascii', 'ignore').decode("utf-8") for method in directions]
 
         # Nutrition
         nutrition = soup.find("div", class_="recipeNutritionSectionBlock")
@@ -109,7 +109,7 @@ def fetchRecipe(url):
         # Methods
         methods = []
         methoddirections = []
-        direc = ' '.join([x.text[:-2] for x in directions]).split('.')
+        direc = ' '.join([x.text[:-3] for x in directions]).split('.')
         # print(direc)
         for i in range(len(direc)):
             method = parse_method(direc[i], i)
