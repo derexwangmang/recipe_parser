@@ -1,11 +1,12 @@
 import requests
 from bs4 import BeautifulSoup as bs
-from ParseMethods import parse_method
+from src.ParseMethods import parse_method
 import re
 import unicodedata as ud
 from parse_ingredients import parse_ingredient
-from parse_tools import parse_tool
+from src.parse_tools import parse_tool
 import sys, os
+from src.ParseSteps import parseSteps
 
 
 # https://stackoverflow.com/questions/8391411/how-to-block-calls-to-print
@@ -122,6 +123,9 @@ def fetchRecipe(url):
         # Tools
         recipe["tools"] = parse_tool(methoddirections)
         # print(recipe["tools"])
+
+        # steps
+        recipe['steps'] = parseSteps(methoddirections)
 
         enablePrint()
 

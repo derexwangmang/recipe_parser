@@ -6,6 +6,7 @@ from src.transformation_vegetarian import transform_vegetarian
 from printpretty import prettyprint
 from src.transformation_free import transform_free
 from src.transformation_chinese import transformation_chinese
+from src.DoubleHalfIngredients import doubleHalfIngredients
 
 
 print("Welcome to our recipe parser and interactive cookbook!")
@@ -25,17 +26,16 @@ print("Option 2: To non-vegetarian")
 print("Option 3: To healthy")
 print("Option 4: To non-healthy")
 print("Option 5: To Chinese cuisine")
-print("Option 6: To an additional style of cuisine")
-print("Option 7: Double the amount")
-print("Option 8: Half the amount")
-print("Option 9: To gluten-free")
-print("Option 10: To lactose-free")
-print("\nInput a number 1-10: \n", end='')
+print("Option 6: Double the amount")
+print("Option 7: Half the amount")
+print("Option 8: To gluten-free")
+print("Option 9: To lactose-free")
+print("\nInput a number 1-9: \n", end='')
 
 option = input()
-while not option.isdigit() or not 1 <= int(option) <= 10:
-    print("ERROR: {} not within 1-10".format(option))
-    print("Input a number 1-10: ", end='')
+while not option.isdigit() or not 1 <= int(option) <= 9:
+    print("ERROR: {} not within 1-9".format(option))
+    print("Input a number 1-9: ", end='')
     option = input()
 
 
@@ -66,22 +66,23 @@ elif option == 5:
     newrecipe = transformation_chinese(recipe)
     prettyprint(newrecipe, "Chinese")
 elif option == 6:
-    pass
+    print("\nYou chose to double the ingredients in your recipe.\n")
+    newrecipe = doubleHalfIngredients(recipe, double=True)
+    prettyprint(newrecipe, "double the ingredients")
 elif option == 7:
-    pass
+    print("\nYou chose to half the ingredients in your recipe.\n")
+    newrecipe = doubleHalfIngredients(recipe, double=False)
+    prettyprint(newrecipe, "half the ingredients")
 elif option == 8:
-    pass
-elif option == 9:
     print("\nYou chose to transform your recipe to gluten-free.\n")
     newrecipe = transform_free(recipe, 'gluten-free')
     transformation = "gluten-free"
     prettyprint(newrecipe, transformation)
-elif option == 10:
+elif option == 9:
     print("\nYou chose to transform your recipe to lactose-free.\n")
     newrecipe = transform_free(recipe, 'lactose-free')
     transformation = "lactose-free"
     prettyprint(newrecipe, transformation)
-
 
 
 ''' 

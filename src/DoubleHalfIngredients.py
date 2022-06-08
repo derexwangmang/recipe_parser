@@ -1,6 +1,7 @@
 
 
-def doubleHalfIngredients(ingredients, double=True):
+def doubleHalfIngredients(recipe, double):
+    ingredients = recipe['ingredients']
     m = .5
     if double:
         m = 2
@@ -22,6 +23,7 @@ def doubleHalfIngredients(ingredients, double=True):
             ing.original_string += ', ' + ing.comment
 
         ingredients[i] = ing
+    recipe['ingrients'] = ingredients
     
-    return ingredients
+    return recipe
         
