@@ -25,7 +25,7 @@ def transform_vegetarian(recipe, switch):
         subbed = False
         name = ingredient.name
 
-        print(swapdict.keys())
+        # print(swapdict.keys())
         for option in swapdict.keys():
             if option in name:
                 subbed = True
