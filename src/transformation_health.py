@@ -4,16 +4,6 @@ HEALTHY_MAPPING = {"oil": "avocado oil", "butter": "coconut oil"}
 CARBS = set(["noodles", "rice", "tofu", "pasta", "crackers", "flour"])
 FLAVORS = set(["salt", "sugar", "sauce"])
 
-from dataclasses import dataclass, replace
-
-@dataclass
-class Ingredient:
-    name : str
-    quantity : int
-    unit : str
-    comment : str
-    original_string : str
-
 # Transforms steps into version by
 #   - Replacing oils with healthy/unhealthy versions
 #   - Doubling/halving carb amounts
