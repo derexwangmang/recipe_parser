@@ -22,6 +22,7 @@ def enablePrint():
 def fetchRecipe(url):
     blockPrint()
 
+    # https://stackoverflow.com/questions/15190930/python-beautifulsoup-parsing-html-fractions
     numerator = {
         'ONE':1,
         'TWO':2,
