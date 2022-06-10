@@ -6,11 +6,12 @@ LACTOSE_FREE = {'heavy cream':'coconut cream', 'heavy whipping cream':'coconut c
 'yogurt': 'pureed silken tofu', 'butter':'margarine', 'mascarpone cheese':'lactose-free mascarpone cheese', 'lady fingers': 'gluten-free lady fingers'
 }
 
-GLUTEN_FREE = {'pasta': 'chickpea pasta', 'linguine':'chickpea linguine', 'spaghetti':'chickpea spaghetti',
+GLUTEN_FREE = {'linguine':'chickpea linguine', 'spaghetti':'chickpea spaghetti',
 'macaroni':'chickpea macaroni', 'penne':'chickpea penne', 'rotini':'chickpea rotini', 'fettuccine':'chickpea fettuccine', 
 'farfalle':'chickpea farfalle', 'rigatoni':'chickpea rigatoni', 'whole wheat tortilla':'almond flour tortilla',
 'tortilla':'almond flour tortilla', 'bread':'gluten-free bread',
-'lasagna':'chickpea lasagna'
+'lasagna':'chickpea lasagna',
+'pasta': 'chickpea pasta'
  }
 
 def transform_free(recipe, switch):
