@@ -26,7 +26,7 @@ def transform_free(recipe, switch):
     ## changing ingredients
     for i in range(len(ingredients)):
         ingredient = ingredients[i]
-        # plural = False
+        plural = False
         subbed = False
         name = ingredient.name
         if name[-1] == 's':
